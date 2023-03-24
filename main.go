@@ -57,8 +57,6 @@ func main() {
 			// Le cookie n'existe pas
 			c.File("./static/login.html")
 		} else {
-			// Le cookie existe, afficher sa valeur
-			fmt.Println("Valeur du cookie:", receivedCookie)
 			if validateJWTToken(receivedCookie) {
 			} else {
 				c.File("./static/login.html")
@@ -97,7 +95,7 @@ func validateJWTToken(tokenString string) bool {
 		return []byte("my-secret-key"), nil
 	})
 	if err != nil {
-		log.Printf("Erreur lors de l'analyse du jeton JWT: %v, token %v", err, token)
+		log.Printf("Erreur lors de l'analyse du jeton JWT: %v", err)
 		return false
 	}
 

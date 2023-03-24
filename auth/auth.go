@@ -28,12 +28,6 @@ type AuthHandler struct {
 
 // isAuthInfoValid vérifie si les informations d'authentification sont valides.
 func (h *AuthHandler) isAuthInfoValid(authInfo *AuthInfo, providedAuthInfo AuthInfo) bool {
-	log.Printf("Auth info validation started...")                  // Ajouter un message de debug
-	log.Printf("Provided username: %s", providedAuthInfo.Username) // Afficher le nom d'utilisateur fourni
-	log.Printf("Provided password: %s", providedAuthInfo.Password) // Afficher le mot de passe fourni
-	log.Printf("Provided token: %s", providedAuthInfo.Token)       // Afficher le mot de passe fourni
-	log.Printf("Retreived username: %s", authInfo.Username)        // Afficher le nom d'utilisateur fourni
-	log.Printf("Retreived password: %s", authInfo.Password)        // Afficher le mot de passe fourni
 	if authInfo.Password == providedAuthInfo.Password {
 		log.Printf("Auth info validation succeeded.") // Ajouter un message de debug
 		return true
@@ -68,7 +62,6 @@ func (h *AuthHandler) Handle(c *gin.Context) {
 	providedAuthInfo := AuthInfo{
 		Username: c.PostForm("username"),
 		Password: c.PostForm("password"),
-		Token:    "mytoken123",
 	}
 
 	// Vérification des informations d'authentification sur le backend de la base de données
@@ -112,7 +105,7 @@ func (h *AuthHandler) Handle(c *gin.Context) {
 // getAuthInfoFromDB récupère les informations d'authentification de la base de données.
 func (h *AuthHandler) getAuthInfoFromDB(username string) (*AuthInfo, error) {
 	// Requête pour récupérer les informations d'authentification
-	row := h.db.QueryRow("SELECT username, password FROM users WHERE username = ?", username)
+	row := h.db.QueryRow("SELECT username, password,isAdmin FROM users WHERE username = ?", username)
 
 	// Récupération des informations d'authentification
 
