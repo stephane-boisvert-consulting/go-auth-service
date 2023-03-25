@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Page de connexion</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="static/login.js"></script>
+</head>
+<body>
+  <h1>Connexion</h1>
+  <form id="login-form">
+    <label for="username">Nom d'utilisateur :</label>
+    <input type="text" id="username" name="username"><br><br>
+
+    <label for="password">Mot de passe :</label>
+    <input type="password" id="password" name="password"><br><br>
+
+    <label for="token">Token :</label>
+    <input type="text" id="token" name="token"><br><br>
+
+    <button type="submit">Se connecter</button>
+  </form>
+
+  <div id="error-message"></div>
+</body>
+</html>
